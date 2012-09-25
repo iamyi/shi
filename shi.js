@@ -49,12 +49,10 @@
     }
   };
 
-  shi.month = {
-    toNumber : function (m) { 
-      if (_.isNumber(m)) return m;
-
-      if (m[0] > '0' && m[0] <= '9') return parseInt(m, 10);
-
+  var Month = shi.month = function (m) {
+    if (_.isNumber(m)) this._month = m;
+    else if (m[0] > '0' && m[0] <= '9') this._month = parseInt(m, 10);
+    else {
       var s = m.toLowerCase();
       var result = 0;
       var i = 0;
@@ -64,10 +62,38 @@
         else i += 1;
       });
 
-      if (i===12) return -1;
-      else return result+1; 
+      if (i===12) this._month = -1;
+      else this._month = result+1; 
     }
+
+    return this._month;
   };
+
+  _.extend(Month.prototype, {
+    toString : function () {
+      return (this._month > 9) ? '' + this._month : '0' + this._month;
+    }
+  });
+
+  // shi.month = {
+  //   toNumber : function (m) { 
+  //     if (_.isNumber(m)) return m;
+
+  //     if (m[0] > '0' && m[0] <= '9') return parseInt(m, 10);
+
+  //     var s = m.toLowerCase();
+  //     var result = 0;
+  //     var i = 0;
+
+  //     _.each(months, function (month) {    
+  //       if (_.indexOf(month, s) !== -1) result = i;
+  //       else i += 1;
+  //     });
+
+  //     if (i===12) return -1;
+  //     else return result+1; 
+  //   }
+  // };
 
   shi.day = {
     toNumber : function(d) {
