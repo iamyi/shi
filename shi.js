@@ -1,63 +1,66 @@
-var util = require('util');
-var _ = require('underscore')._;
+(function() {
 
-var shi = {};
+  var util = require('util');
+  var _ = require('underscore')._;
 
-module.exports = shi;
+  var shi = {};
 
-var january = ['january', 'jan']
-  , february = ['february', 'feb']
-  , march = ['march', 'mar']
-  , april = ['april']
-  , may = ['may']
-  , june = ['june']
-  , july = ['july']
-  , august = ['august', 'aug']
-  , september = ['september', 'sept']
-  , october = ['october', 'oct']
-  , november = ['november', 'nov']
-  , december = ['december', 'dec']
-  , months = [january, february, march, april, may, june, july, august, september, october, november, december]
-  ;
+  module.exports = shi;
 
-var toString = function (d) {
-  return (d <= 9) ? '0' + d : d;
-};
+  var january = ['january', 'jan']
+    , february = ['february', 'feb']
+    , march = ['march', 'mar']
+    , april = ['april']
+    , may = ['may']
+    , june = ['june']
+    , july = ['july']
+    , august = ['august', 'aug']
+    , september = ['september', 'sept']
+    , october = ['october', 'oct']
+    , november = ['november', 'nov']
+    , december = ['december', 'dec']
+    , months = [january, february, march, april, may, june, july, august, september, october, november, december]
+    ;
 
-var toDateString = exports.toDateString = function (year, month, day) {
-  return util.format('%s/%s/%s', year, toString(month), toString(day));
-};
+  var toString = function (d) {
+    return (d <= 9) ? '0' + d : d;
+  };
 
-shi.year = {
-  toNumber : function (y) {
-    var year = _.isNumber(y) ? y : parseInt(y, 10);
+  var toDateString = exports.toDateString = function (year, month, day) {
+    return util.format('%s/%s/%s', year, toString(month), toString(day));
+  };
 
-    return (year > 2000) ? year : 2000 + year;
-  }
-};
+  shi.year = {
+    toNumber : function (y) {
+      var year = _.isNumber(y) ? y : parseInt(y, 10);
 
-shi.month = {
-  toNumber : function (m) { 
-    if (_.isNumber(m)) return m;
+      return (year > 2000) ? year : 2000 + year;
+    }
+  };
 
-    if (m[0] > '0' && m[0] <= '9') return parseInt(m, 10);
+  shi.month = {
+    toNumber : function (m) { 
+      if (_.isNumber(m)) return m;
 
-    var s = m.toLowerCase();
-    var result = 0;
-    var i = 0;
+      if (m[0] > '0' && m[0] <= '9') return parseInt(m, 10);
 
-    _.each(months, function (month) {    
-      if (_.indexOf(month, s) !== -1) result = i;
-      else i += 1;
-    });
+      var s = m.toLowerCase();
+      var result = 0;
+      var i = 0;
 
-    if (i===12) return -1;
-    else return result+1; 
-  }
-};
+      _.each(months, function (month) {    
+        if (_.indexOf(month, s) !== -1) result = i;
+        else i += 1;
+      });
 
-shi.day = {
-  toNumber : function(d) {
-    return _.isNumber(d) ? d : parseInt(d, 10);
-  }
-};
+      if (i===12) return -1;
+      else return result+1; 
+    }
+  };
+
+  shi.day = {
+    toNumber : function(d) {
+      return _.isNumber(d) ? d : parseInt(d, 10);
+    }
+  };
+}).call(this);
