@@ -134,7 +134,7 @@
     var monthRegex = /(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/g;
 
     var matches = str.match(monthRegex);
-
+  
     if (matches.length === 1) {
       month1 = month2 = matches[0];
     }    

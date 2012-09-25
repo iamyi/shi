@@ -39,12 +39,12 @@ describe('shi', function () {
   describe('shi.date', function () {
     it('should have correct string format for number input', function () {
       assert.equal('2012/09/12', shi.date(2012,9,12));
-      assert.equal('2009/12/01', shi.date(2009, 12, 1));
+      assert.equal('2009/12/01', shi.date(2009,12,1));
     });
 
     it('should have correct string format for string input', function () {
       assert.equal('2012/09/12', shi.date('2012','9','12'));
-      assert.equal('2009/12/01', shi.date('2009', '12', '01'));
+      assert.equal('2009/12/01', shi.date('2009','12','01'));
     });
   });
 });
