@@ -1,1 +1,1 @@
-module.exports = exports = require('shi');
+module.exports = require('shi');

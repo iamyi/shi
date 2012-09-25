@@ -1,7 +1,9 @@
 var util = require('util');
 var _ = require('underscore')._;
 
-var shi = exports;
+var shi = {};
+
+module.exports = shi;
 
 var january = ['january', 'jan']
   , february = ['february', 'feb']
@@ -18,7 +20,7 @@ var january = ['january', 'jan']
   , months = [january, february, march, april, may, june, july, august, september, october, november, december]
   ;
 
-var toString = exports.toString = function (d) {
+var toString = function (d) {
   return (d <= 9) ? '0' + d : d;
 };
 
@@ -26,7 +28,7 @@ var toDateString = exports.toDateString = function (year, month, day) {
   return util.format('%s/%s/%s', year, toString(month), toString(day));
 };
 
-var year = exports.year = {
+shi.year = {
   toNumber : function (y) {
     var year = _.isNumber(y) ? y : parseInt(y, 10);
 
@@ -34,7 +36,7 @@ var year = exports.year = {
   }
 };
 
-var month = exports.month = {
+shi.month = {
   toNumber : function (m) { 
     if (_.isNumber(m)) return m;
 
@@ -54,7 +56,7 @@ var month = exports.month = {
   }
 };
 
-var day = exports.day = {
+shi.day = {
   toNumber : function(d) {
     return _.isNumber(d) ? d : parseInt(d, 10);
   }
