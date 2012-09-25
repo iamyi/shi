@@ -1,11 +1,22 @@
 (function() {
 
+  var root = this;
+
   var util = require('util');
   var _ = require('underscore')._;
 
   var shi = {};
 
-  module.exports = shi;
+  if (typeof exports !== 'undefined') {
+    if (typeof module !== 'undefined' && module.exports) {
+      exports = module.exports = shi;
+    }
+    exports.shi = shi;
+  } else {
+    root['shi'] = shi;
+  }  
+
+  shi.VERSION = '0.0.0';
 
   var january = ['january', 'jan']
     , february = ['february', 'feb']
