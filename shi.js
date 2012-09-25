@@ -21,12 +21,12 @@
   var january = ['january', 'jan']
     , february = ['february', 'feb']
     , march = ['march', 'mar']
-    , april = ['april']
+    , april = ['april', 'apr']
     , may = ['may']
-    , june = ['june']
-    , july = ['july']
+    , june = ['june', 'jun']
+    , july = ['july', 'jul']
     , august = ['august', 'aug']
-    , september = ['september', 'sept']
+    , september = ['september', 'sept', 'sep']
     , october = ['october', 'oct']
     , november = ['november', 'nov']
     , december = ['december', 'dec']
@@ -109,6 +109,8 @@
   var dateRange = shi.dateRange = function (str) {
     // remove escaped html: &#150;
     str = str.replace(/&#\d+;/g, ' ');
+    // remove <h2> tags
+    str = str.replace(/<\/?h\d+>/g, ' ');
     // clean up input string    
     str = str.toLowerCase().replace(/[^a-z0-9]/g, ' ');
 
@@ -117,12 +119,15 @@
     var yearRegex = /[12]\d\d\d/g;
     var matches = str.match(yearRegex);
 
-    if (matches.length === 1) year1 = year2 = matches[0];
+    if(!matches) {
+      var t = new Date();
+      year1 = year2 = t.getFullYear();
+    }
+    else if (matches.length === 1) year1 = year2 = matches[0];
     else if (matches.length === 2) {
       year1 = matches[0];
       year2 = matches[1];
-    } 
-    else return null;
+    }
 
     // make sure the year1 <= year2
     if (year1 > year2) return null;
@@ -145,7 +150,7 @@
     else return null;
 
     // remove the month values from the input string
-    str = str.replace(/(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z\.]*/, '');
+    str = str.replace(/(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z\.]*/, ' ').trim();    
 
     // now look for the dates, by now, there should be two dates in the cleaned up string
     var day1 = null, day2 = null;
