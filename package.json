@@ -10,6 +10,10 @@
     "type": "git",
     "url": "git@github.com:iamyi/shi.git"
   },
+  "dependencies": {
+      "underscore" : "*"
+    , "assert" : "*"
+  },
   "author": "Yi Chen",
   "license": "BSD"
 }
