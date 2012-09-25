@@ -49,6 +49,12 @@
       return this._year = year;
   };
 
+  _.extend(Year.prototype, {
+    toString: function () {
+      return '' + this._year;
+    }
+  });
+
   var Month = shi.month = function (m) {
     if (_.isNumber(m)) this._month = m;
     else if (m[0] > '0' && m[0] <= '9') this._month = parseInt(m, 10);
@@ -78,6 +84,26 @@
   var Day = shi.day = function (d) {
     _.isNumber(d) || (d = parseInt(d, 10));
     return this._day = d;
+  };
+
+  _.extend(Day.prototype, {
+    toString : function () {
+      return (this._day > 9) ? '' + this._day : '0' + this._day;
+    }
+  });
+
+  var ShiDate = shi.date = function(year, month, day) {
+    year = new Year(year);
+    month = new Month(month);
+    day = new Day(day);
+
+    this._date = util.format('%s/%s/%s'
+      , year.toString()
+      , month.toString()
+      , day.toString()
+    );
+
+    return this._date;
   };
 
 }).call(this);
