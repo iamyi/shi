@@ -1,6 +1,6 @@
 {
   "name": "shi",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Date and Time manipulation utility",
   "main": "index.js",
   "scripts": {
